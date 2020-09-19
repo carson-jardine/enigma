@@ -8,6 +8,22 @@ class EnigmaTest < Minitest::Test
   def test_it_exists
     assert_instance_of Enigma, @enigma
   end
+
+  def test_it_can_generate_key
+    @enigma.stubs(:rand).returns(89631)
+
+    assert_equal "89631", @enigma.default_key
+  end
+
+  def test_it_can_encrypt_message_with_key_and_date
+    skip
+    expected = {
+        encryption: "keder ohulw",
+        key: "02715",
+        date: "040895"
+      }
+    assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
+  end
 end
 
 # encrypt a message with a key and date
