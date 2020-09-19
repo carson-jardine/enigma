@@ -25,6 +25,14 @@ class EnigmaTest < Minitest::Test
     assert_equal [2, 27, 71, 15], @enigma.generate_key("02715")
   end
 
+  def test_it_can_square_date
+    assert_equal 1672401025, @enigma.date_squared("040895")
+  end
+
+  def test_it_can_generate_offset
+    assert_equal [1, 0, 2, 5], @enigma.generate_offset("040895")
+  end
+
   def test_it_can_encrypt_message_with_key_and_date
     skip
     expected = {
