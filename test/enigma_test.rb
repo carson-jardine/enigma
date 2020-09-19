@@ -21,6 +21,10 @@ class EnigmaTest < Minitest::Test
     assert_equal "220894", @enigma.default_date
   end
 
+  def test_it_can_generate_actual_keys
+    assert_equal [2, 27, 71, 15], @enigma.generate_key("02715")
+  end
+
   def test_it_can_encrypt_message_with_key_and_date
     skip
     expected = {
