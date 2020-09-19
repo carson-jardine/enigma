@@ -4,7 +4,11 @@ class Enigma
     sprintf('%05d', rand(10 ** 5))
   end
 
+  def default_date
+    Date.today.strftime("%d%m%y")
+  end
+
   def encrypt(message, key, date)
-  
+
   end
 end
