@@ -54,4 +54,24 @@ class Enigma
       end
     end.join
   end
+
+  def decrypt(ciphertext, key = default_key, date = default_date)
+    decrypted = generate_decryption(ciphertext, key, date)
+    {
+      decryption: decrypted,
+      key: key,
+      date: date
+    }
+  end
+
+  def generate_decryption(ciphertext, key, date)
+    shifts = generate_shifts(generate_keys(key), generate_offsets(date))
+    ciphertext.downcase.split('').map.with_index do |chr, index|
+      if character_set.include?(chr)
+        character_set.rotate(-shifts[index % 4])[character_set.index(chr)]
+      else
+        chr
+      end
+    end.join
+  end
 end
