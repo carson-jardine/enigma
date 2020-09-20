@@ -8,7 +8,7 @@ class EnigmaTest < Minitest::Test
   def test_it_exists
     assert_instance_of Enigma, @enigma
   end
-
+  
   def test_it_can_generate_default_key
     @enigma.stubs(:rand).returns(89631)
 
@@ -45,11 +45,24 @@ class EnigmaTest < Minitest::Test
 
   def test_it_can_encrypt_message_with_key_and_date
     expected = {
-        encryption: "keder ohulw",
-        key: "02715",
-        date: "040895"
-      }
+      encryption: "keder ohulw",
+      key: "02715",
+      date: "040895"
+    }
     assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
+  end
+
+  def test_it_can_generate_decryption
+    assert_equal "hello world", @enigma.generate_decryption("keder ohulw", "02715", "040895")
+  end
+
+  def test_it_can_decrypt_message_with_key_and_date
+    expected = {
+      decryption: "hello world",
+      key: "02715",
+      date: "040895"
+    }
+    assert_equal expected, @enigma.decrypt("keder ohulw", "02715", "040895")
   end
 
   def test_it_can_encrypt_message_with_key_and_default_date
@@ -61,38 +74,37 @@ class EnigmaTest < Minitest::Test
       date: "040895"
     }
     assert_equal expected, @enigma.encrypt("hello world", "02715")
+
+    Date.stubs(:today).returns(Date.new(2020,9,19))
+
+    expected = {
+      encryption: "pib wdmczpu",
+      key: "02715",
+      date: "190920"
+    }
+    assert_equal expected, @enigma.encrypt("hello world", "02715")
   end
 
-  def test_it_can_encrypt_message_with_default_key_and_default_date
-    @enigma.stubs(:rand).returns(89631)
+  def test_it_can_decrypt_with_key_and_default_date
     Date.stubs(:today).returns(Date.new(1995,8,4))
 
     expected = {
-      encryption: "qtwuxogx  o",
-      key: "89631",
+      decryption: "hello world",
+      key: "02715",
+      date: "040895"
+    }
+    assert_equal expected, @enigma.decrypt("keder ohulw", "02715")
+  end
+
+  def test_it_can_encrypt_message_with_default_key_and_default_date
+    @enigma.stubs(:rand).returns(2715)
+    Date.stubs(:today).returns(Date.new(1995,8,4))
+
+    expected = {
+      encryption: "keder ohulw",
+      key: "02715",
       date: "040895"
     }
     assert_equal expected, @enigma.encrypt("hello world")
   end
 end
-
-# decrypt a message with a key and date
- # @enigma.decrypt("keder ohulw", "02715", "040895")
-#=>
-#   {
-#     decryption: "hello world",
-#     key: "02715",
-#     date: "040895"
-#   }
-
-# encrypt a message with a key (uses today's date)
-# @encrypted = enigma.encrypt("hello world", "02715")
-#=> # encryption hash here
-
-#decrypt a message with a key (uses today's date)
- # @enigma.decrypt(encrypted[:encryption], "02715")
-#=> # decryption hash here
-
-# encrypt a message (generates random key and uses today's date)
-# @enigma.encrypt("hello world")
-#=> # encryption hash here
