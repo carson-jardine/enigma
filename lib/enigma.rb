@@ -36,5 +36,22 @@ class Enigma
   end
 
   def encrypt(message, key = default_key, date = default_date)
+    encrypted = generate_encryption(message, key, date)
+    {
+      encryption: encrypted,
+      key: key,
+      date: date
+    }
+  end
+
+  def generate_encryption(message, key = default_key, date = default_date)
+    shifts = generate_shifts(generate_keys(key), generate_offsets(date))
+    message.downcase.split('').map.with_index do |chr, index|
+      if character_set.include?(chr)
+        character_set.rotate(shifts[index % 4])[character_set.index(chr)]
+      else
+        chr
+      end
+    end.join
   end
 end
