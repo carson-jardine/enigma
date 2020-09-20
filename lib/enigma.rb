@@ -1,3 +1,4 @@
+require 'date'
 class Enigma
   #maybe move both key and date to module since they're both generating default values? Generatable?
 
