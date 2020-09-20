@@ -24,8 +24,8 @@ class Enigma
   end
 
   def generate_shifts(keys, offsets)
-    keys.each_with_index.flat_map do |key, key_idx|
-      offsets.each_with_index.map do |offset, offset_idx|
+    keys.flat_map.with_index do |key, key_idx|
+      offsets.map.with_index do |offset, offset_idx|
         key + offset if key_idx == offset_idx
       end
     end.compact
