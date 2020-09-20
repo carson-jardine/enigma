@@ -22,15 +22,21 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_generate_actual_keys
-    assert_equal [2, 27, 71, 15], @enigma.generate_key("02715")
+    assert_equal [2, 27, 71, 15], @enigma.generate_keys("02715")
   end
 
   def test_it_can_square_date
     assert_equal 1672401025, @enigma.date_squared("040895")
   end
 
-  def test_it_can_generate_offset
-    assert_equal [1, 0, 2, 5], @enigma.generate_offset("040895")
+  def test_it_can_generate_offsets
+    assert_equal [1, 0, 2, 5], @enigma.generate_offsets("040895")
+  end
+
+  def test_it_can_generate_shifts
+    keys = @enigma.generate_keys("02715")
+    offsets = @enigma.generate_offsets("040895")
+    assert_equal [3, 27, 73, 20], @enigma.generate_shifts(keys, offsets)
   end
 
   def test_it_can_encrypt_message_with_key_and_date
