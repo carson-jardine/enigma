@@ -39,8 +39,12 @@ class EnigmaTest < Minitest::Test
     assert_equal [3, 27, 73, 20], @enigma.generate_shifts(keys, offsets)
   end
 
+  def test_it_can_generate_encryption
+    assert_equal "keder ohulw", @enigma.generate_encryption("hello world", "02715", "040895")
+  end
+
   def test_it_can_encrypt_message_with_key_and_date
-    skip
+    # skip
     expected = {
         encryption: "keder ohulw",
         key: "02715",
