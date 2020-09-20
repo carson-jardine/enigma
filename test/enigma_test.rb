@@ -44,7 +44,6 @@ class EnigmaTest < Minitest::Test
   end
 
   def test_it_can_encrypt_message_with_key_and_date
-    # skip
     expected = {
         encryption: "keder ohulw",
         key: "02715",
@@ -52,16 +51,30 @@ class EnigmaTest < Minitest::Test
       }
     assert_equal expected, @enigma.encrypt("hello world", "02715", "040895")
   end
-end
 
-# encrypt a message with a key and date
-# @enigma.encrypt("hello world", "02715", "040895")
-#=>
-#   {
-#     encryption: "keder ohulw",
-#     key: "02715",
-#     date: "040895"
-#   }
+  def test_it_can_encrypt_message_with_key_and_default_date
+    Date.stubs(:today).returns(Date.new(1995,8,4))
+
+    expected = {
+      encryption: "keder ohulw",
+      key: "02715",
+      date: "040895"
+    }
+    assert_equal expected, @enigma.encrypt("hello world", "02715")
+  end
+
+  def test_it_can_encrypt_message_with_default_key_and_default_date
+    @enigma.stubs(:rand).returns(89631)
+    Date.stubs(:today).returns(Date.new(1995,8,4))
+
+    expected = {
+      encryption: "qtwuxogx  o",
+      key: "89631",
+      date: "040895"
+    }
+    assert_equal expected, @enigma.encrypt("hello world")
+  end
+end
 
 # decrypt a message with a key and date
  # @enigma.decrypt("keder ohulw", "02715", "040895")
