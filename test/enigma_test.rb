@@ -60,6 +60,10 @@ class EnigmaTest < Minitest::Test
     assert_equal "hello world", @enigma.generate_decryption("keder ohulw", "02715", "040895")
   end
 
+  def test_it_can_generate_decryption_with_special_chr
+    assert_equal "hello world!", @enigma.generate_decryption("keder ohulw!", "02715", "040895")
+  end
+
   def test_it_can_decrypt_message_with_key_and_date
     expected = {
       decryption: "hello world",
