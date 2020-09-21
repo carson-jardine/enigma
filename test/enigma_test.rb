@@ -8,7 +8,7 @@ class EnigmaTest < Minitest::Test
   def test_it_exists
     assert_instance_of Enigma, @enigma
   end
-  
+
   def test_it_can_generate_default_key
     @enigma.stubs(:rand).returns(89631)
 
@@ -39,8 +39,17 @@ class EnigmaTest < Minitest::Test
     assert_equal [3, 27, 73, 20], @enigma.generate_shifts(keys, offsets)
   end
 
+  def test_it_can_find_shifts
+    assert_equal [3, 27, 73, 20], @enigma.shifts("02715", "040895")
+    assert_equal [8, 31, 71, 15], @enigma.shifts("02715", "210920")
+  end
+
   def test_it_can_generate_encryption
     assert_equal "keder ohulw", @enigma.generate_encryption("hello world", "02715", "040895")
+  end
+
+  def test_it_can_generate_encryption_with_special_chr
+    assert_equal "keder ohulw!", @enigma.generate_encryption("hello world!", "02715", "040895")
   end
 
   def test_it_can_encrypt_message_with_key_and_date
@@ -54,6 +63,10 @@ class EnigmaTest < Minitest::Test
 
   def test_it_can_generate_decryption
     assert_equal "hello world", @enigma.generate_decryption("keder ohulw", "02715", "040895")
+  end
+
+  def test_it_can_generate_decryption_with_special_chr
+    assert_equal "hello world!", @enigma.generate_decryption("keder ohulw!", "02715", "040895")
   end
 
   def test_it_can_decrypt_message_with_key_and_date
