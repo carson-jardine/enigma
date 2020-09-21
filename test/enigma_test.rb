@@ -39,6 +39,11 @@ class EnigmaTest < Minitest::Test
     assert_equal [3, 27, 73, 20], @enigma.generate_shifts(keys, offsets)
   end
 
+  def test_it_can_find_shifts
+    assert_equal [3, 27, 73, 20], @enigma.shifts("02715", "040895")
+    assert_equal [8, 31, 71, 15], @enigma.shifts("02715", "210920")
+  end
+
   def test_it_can_generate_encryption
     assert_equal "keder ohulw", @enigma.generate_encryption("hello world", "02715", "040895")
   end
