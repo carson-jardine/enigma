@@ -1,16 +1,10 @@
 require 'date'
 require_relative 'generatable'
+require_relative 'defaultable'
 
 class Enigma
   include Generatable
-
-  def default_key
-    sprintf('%05d', rand(10 ** 5))
-  end
-
-  def default_date
-    Date.today.strftime("%d%m%y")
-  end
+  include Defaultable
 
   def date_squared(date)
     date.to_i ** 2
