@@ -6,9 +6,9 @@ incoming_text = message.read
 message.close
 
 enigma = Enigma.new
-encrypted_text = enigma.encrypt(incoming_text)
+cipheredtext = enigma.encrypt(incoming_text)
 
 writer = File.open(ARGV[1], 'w')
-writer.write(encrypted_text[:encryption])
+writer.write(cipheredtext[:encryption])
 
-puts "Created '#{ARGV[1]}' with the key #{encrypted_text[:key]} and date #{encrypted_text[:date]}"
+puts "Created '#{ARGV[1]}' with the key #{cipheredtext[:key]} and date #{cipheredtext[:date]}"
