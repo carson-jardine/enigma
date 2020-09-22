@@ -52,7 +52,7 @@ You will again see a confirmation with the destination file and key/date given. 
 #### **Functionality** `3`:
 Encryption and decryption methods are successfully implemented in the Enigma Class and the command line interface.
 
-#### **Object Oriented Programming** `4`:
+#### **Object Oriented Programming** `3`:
 Code is well organized and implements the use of modules.
 
 #### **Ruby Conventions and Mechanics** `4`:
@@ -61,5 +61,5 @@ Methods are properly named and not excessively long. Code syntax is consistent a
 #### **Test Driven Development** `4`:
 Test coverage through `Simple_Cov` shows 100% coverage. Stubs were used appropriately and successfully.
 
-#### **Version Control** `3.5`:
+#### **Version Control** `4`:
 Appropriate amount of commits and pull requests. Most commits do not include multiple pieces of functionality.
