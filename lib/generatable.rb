@@ -10,12 +10,8 @@ module Generatable
     date_squared(date).digits.reverse[-4..-1]
   end
 
-  def generate_shifts(keys, offsets)
-    keys.flat_map.with_index do |key, key_idx|
-      offsets.map.with_index do |offset, offset_idx|
-        key + offset if key_idx == offset_idx
-      end
-    end.compact
+  def generate_shifts(key, offsets)
+    key.zip(offsets).map(&:sum)
   end
 
   def shifts(key, date)
