@@ -1,5 +1,4 @@
 module Generatable
-
   def generate_keys(key)
     key.split('').each_cons(2).map do |pair|
       pair.join.to_i
